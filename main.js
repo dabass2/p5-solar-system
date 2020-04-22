@@ -1,5 +1,7 @@
 let img;
 let theta = 0
+let btn
+let play = true;
 // let font;
 
 function preload() {
@@ -10,16 +12,13 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
-  // textFont(font)
-  textSize(width/50)
-  textAlign(CENTER, CENTER)
+  // btn = createButton("Stop Loop")
+  // btn.position(0, 0)
+  // btn.mousePressed(noLoop)
 }
 
-function draw() {
-  orbitControl()
-  background(0);
-  ambientLight(250);
-
+function drawAxes()
+{
   stroke('red')
   line(-windowWidth, 0, windowWidth, 0) // x-axis
   stroke('blue')
@@ -27,6 +26,13 @@ function draw() {
   stroke('green')
   line(0, 0, -windowWidth, 0, 0, windowWidth) // z-axis
   noStroke()
+}
+
+function draw() {
+  orbitControl()
+  background(0);
+  ambientLight(250);
+  drawAxes()
 
   angleMode(DEGREES)
 
@@ -43,10 +49,17 @@ function draw() {
   rotate(6.68)
   texture(moon)
   r = windowWidth*.4
-  translate(-r*cos(theta) , -((r*(tan(5.14)))), r*sin(theta))
+  translate(0, sin(5.17), r)
+  let v = p5.Vector.fromAngle(85.14, r)
+  v.rotate(0)
+  // translate(v.x, v.y, 0)
+  // console.log(r*cos(theta), r*sin(theta))
+  // translate(x, y, [z])
+  // translate(r*cos(theta), r*sin(theta), 0)
   // console.log(-((r*(tan(5.14)))))
+  // translate(r, 0, 0)
   sphere(50, 48, 32)
   pop()
 
-  theta += 1
+  theta += PI
 }
